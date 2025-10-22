@@ -16,6 +16,7 @@ public class lox {
             System.out.println("Usage: jlox [script]");
             System.exit(64); //Following the UNIX sysexit.h 64: means the command was invoked incorrectly
         } else if (args.length == 1) {
+            //TODO: ADD extension validation.
             runFile(args[0]);
         }
         else {
@@ -46,11 +47,14 @@ public class lox {
 
     private static void run(String source) {
         Scanner scanner = new Scanner(source);
-        List<Token> tokens = scanner.scanTokens(); //TODO: There is still no class Token and scanTokens
+        List<Token> tokens = scanner.scanTokens();
+        System.out.println("-------------------------------------" );
+        System.out.println("TOKEN TYPE      LEXEME   LITERAL VALUE" );
+        System.out.println("-------------------------------------" );
 
-        // Just print tokens.
         for (Token token : tokens) {
-            System.out.println(token);
+            String formattedLine = String.format("%-15s %-10s %s", token.type, token.lexeme, token.literal);
+            System.out.println(formattedLine);
         }
     }
 
